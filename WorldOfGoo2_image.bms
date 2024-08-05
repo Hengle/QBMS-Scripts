@@ -1,0 +1,13 @@
+# by Durik256
+# World Of Goo 2 [*.image]
+# script for QuickBMS http://quickbms.aluigi.org
+
+goto 0x10
+get ZSIZE long
+get SIZE long
+
+get NAME BASENAME
+string OUTNAME p "%s.ktx" NAME
+
+comtype ZSTD
+clog OUTNAME 0x24 ZSIZE SIZE
