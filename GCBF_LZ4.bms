@@ -1,0 +1,36 @@
+# by Durik256
+# unk game [*.bdae] for magic GCBF
+# script for QuickBMS http://quickbms.aluigi.org
+
+idstring "GCBF"
+get NUM long
+comtype LZ4
+set DEST_OFS 0
+log MEMORY_FILE 0 0
+append 1
+for i = 0 < NUM
+	get DEST_SIZE long
+	get END_BLOCK long
+	savepos CUR_OFFSET
+
+	if DEST_SIZE > 0
+		goto DEST_OFS
+		idstring "padA 4zL"
+		get C_SIZE long
+		get SIZE long
+		goto 0x14 0 SEEK_CUR
+		savepos DATA_OFFSET
+		clog MEMORY_FILE DATA_OFFSET C_SIZE SIZE
+	endif
+	
+	set DEST_OFS END_BLOCK
+	goto CUR_OFFSET
+
+next i
+append
+
+get NAME BASENAME
+string OUTNAME p "%s_dec.bdae" NAME
+
+get MEMORY_SIZE asize MEMORY_FILE
+log OUTNAME 0 MEMORY_SIZE MEMORY_FILE
