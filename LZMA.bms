@@ -1,0 +1,27 @@
+#byDurik256
+#Ace Racing, unpack all LZMA block from file
+comtype lzma
+math INDEX = 0
+for
+    findLoc OFFSET string "LZMA"
+    
+    if OFFSET == ""
+        cleanexit
+    endif
+    
+    math OFFSET - 16
+    print "ofs: %OFFSET%"
+    goto OFFSET
+    get BLOCKSIZE long
+    math BLOCKSIZE - 24
+    get UNK1 long # 2 ushort
+    get UNK2 long
+    get DECSIZE long
+    get MAGIC long # LZMA
+    get DECSIZE1 long
+    savepos OFSDATA
+    get NAME basename
+    string NAME p "%s_%s.dec" NAME INDEX
+    clog NAME OFSDATA BLOCKSIZE DECSIZE
+    math INDEX += 1
+Next
