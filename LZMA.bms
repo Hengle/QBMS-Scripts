@@ -1,5 +1,5 @@
 #byDurik256
-#Ace Racing, unpack all LZMA block from file
+#Ace Racer, unpack all LZMA block from file
 comtype lzma
 math INDEX = 0
 for
